@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<metadata>
+  <smarterAppMetadata xmlns="http://www.smarterapp.org/ns/1/assessment_item_metadata">
+    <Identifier>554</Identifier>
+    <AdministrationDate>Pilot</AdministrationDate>
+    <Language>eng</Language>
+    <Language>spa</Language>
+    <EnemyItem>123456</EnemyItem>
+    <EnemyItem>8520</EnemyItem>
+    <MathematicalPractice>6</MathematicalPractice>
+    <AssociatedTutorial>1075</AssociatedTutorial>
+    <AssociatedWordlist>1311</AssociatedWordlist>
+    
+    <StandardPublication>
+       <Publication>SBAC-MA-V1</Publication>
+       <PrimaryStandard>2|A|H-6|a/s|6.A.3</PrimaryStandard>
+       <SecondaryStandard>2|A|H-6|a/s|6.A.4</SecondaryStandard>
+       <SecondaryStandard>2|A|H-6|a/s|6.A.5</SecondaryStandard>
+       <SecondaryStandard>2|A|H-6|a/s|6.A.6</SecondaryStandard>
+    </StandardPublication>
+
+    <StandardPublication>
+       <Publication>SBAC-MA-V2</Publication>
+       <PrimaryStandard>1|G|H-6|a/s|6.G.2</PrimaryStandard>
+       <SecondaryStandard>1|G|H-6|a/s|6.G.2</SecondaryStandard>
+       <SecondaryStandard>1|G|H-6|a/s|6.G.2</SecondaryStandard>
+       <SecondaryStandard>1|G|H-6|a/s|6.G.2</SecondaryStandard>
+    </StandardPublication>
+    
+    <IrtDimension>
+      <IrtDimensionPurpose>Computation</IrtDimensionPurpose>
+      <IrtModelType>IRT3pl</IrtModelType>
+      <IrtScore>1</IrtScore>
+      <IrtWeight>1.0</IrtWeight>
+      <IrtParameter>
+        <Name>a</Name>
+        <Value>1.0</Value>
+      </IrtParameter >
+      <IrtParameter>
+        <Name>b</Name>
+        <Value>-0.4</Value>
+      </IrtParameter>
+      <IrtParameter>
+        <Name>c</Name>
+        <Value>0.33</Value>
+      </IrtParameter>
+    </IrtDimension>
+    <IrtDimension>
+      <IrtDimensionPurpose>Abstraction</IrtDimensionPurpose>
+      <IrtModelType>IRT3pl</IrtModelType>
+      <IrtScore>2</IrtScore>
+      <IrtWeight>1.0</IrtWeight>
+      <IrtParameter>
+        <Name>a</Name>
+        <Value>0.86</Value>
+      </IrtParameter >
+      <IrtParameter>
+        <Name>b</Name>
+        <Value>1.05</Value>
+      </IrtParameter >
+      <IrtParameter>
+        <Name>c</Name>
+        <Value>0.15</Value>
+      </IrtParameter>
+    </IrtDimension>
+    <Subject>ELA</Subject>
+    <IntendedGrade>2</IntendedGrade>
+    <AssociatedStimulus>3291020</AssociatedStimulus>
+    <StimulusName>Continence of King Francis the First, The by Honore de Balzac :20142808_09948251</StimulusName>
+    <InteractionType>GI</InteractionType>
+    <Version>1.2</Version>
+    <Status>Field Test</Status>
+  </smarterAppMetadata>
+  <nonSmarterApp1>value1a</nonSmarterApp1>
+  <nonSmarterApp1>value1b</nonSmarterApp1>
+  <nonSmarterApp2>value2</nonSmarterApp2>
+  <nonSmarterApp3>value3</nonSmarterApp3>
+  <nonSmarterApp4>value4</nonSmarterApp4>
+</metadata>

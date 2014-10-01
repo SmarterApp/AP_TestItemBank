@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.opentestsystem.authoring</groupId>
+        <artifactId>test-item-bank.parent</artifactId>
+        <version>R01.00.00</version>
+    </parent>
+
+    <artifactId>test-item-bank.rest</artifactId>
+    <name>Smarter Balanced #11 Test Item Bank Repository Component - REST</name>
+
+    <packaging>war</packaging>
+
+    
+    <properties>
+        <sb11-shared-security.version>0.0.1</sb11-shared-security.version>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-core</artifactId>
+            <version>${spring-integration.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
+        </dependency>
+
+
+
+        <!-- need this for @Configuration
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>${cglib.version}</version>
+        </dependency>
+ -->
+        <!-- intra-project dependencies -->
+        <dependency>
+            <groupId>org.opentestsystem.authoring</groupId>
+            <artifactId>test-item-bank.domain</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.opentestsystem.authoring</groupId>
+            <artifactId>test-item-bank.persistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.opentestsystem.shared</groupId>
+            <artifactId>rest-api-generator</artifactId>
+            <version>${rest-api-generator.version}</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.opentestsystem.shared</groupId>
+            <artifactId>rest-api-generator</artifactId>
+            <version>${rest-api-generator.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.opentestsystem.shared</groupId>
+        	<artifactId>prog-mgmnt-client</artifactId>
+        	<version>${progman-client.version}</version>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.opentestsystem.shared</groupId>
+        	<artifactId>prog-mgmnt-client-null-impl</artifactId>
+        	<version>${progman-client.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.library.version}</version>
+        </dependency>
+        
+                
+        <dependency>
+            <groupId>org.opentestsystem.shared</groupId>
+            <artifactId>sb11-shared-security</artifactId>
+            <version>${sb11-shared-security.version}</version>
+        </dependency>  
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- tell maven to build both WAR and JAR. We pull JAR in the integration-test project. use <classifier>classes</classifier> in a dependency to pull JAR file in to another project. -->
+            <plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+				<configuration>
+					<attachClasses>true</attachClasses>
+					<classesClassifier>classes</classesClassifier>
+					<archive>
+						<manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+                        <manifestEntries>
+                            <Specification-Version>${project.version}</Specification-Version>
+                            <Implementation-Version>${BUILD_NUMBER}</Implementation-Version>
+                            <Implementation-Date>${BUILD_ID}</Implementation-Date>
+                            <Implementation-Identifier>${GIT_COMMIT}</Implementation-Identifier>
+                            <Implementation-Url>${BUILD_URL}</Implementation-Url>
+                        </manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources/properties</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>properties/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+</project>

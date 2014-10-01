@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:oauth2="http://www.springframework.org/schema/security/oauth2"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+              http://www.springframework.org/schema/security 
+              http://www.springframework.org/schema/security/spring-security-3.2.xsd 
+              http://www.springframework.org/schema/context 
+              http://www.springframework.org/schema/context/spring-context-3.1.xsd
+              http://www.springframework.org/schema/security/oauth2
+              http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
+
+    
+<!-- Enable auto-wiring -->
+<context:annotation-config/>
+<context:component-scan base-package="org.springframework.security.saml,org.opentestsystem.shared.security.service,org.opentestsystem.shared.security.integration"/>
+  
+
+    
+    
+<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore" ></bean>
+    
+<bean id="tokenServices" class="org.opentestsystem.shared.security.oauth.resource.RemoteTokenAccess" >
+    <property name="clientId" value="${tib.oauth.resource.client.id}" />
+    <property name="clientSecret" value="${tib.oauth.resource.client.secret}" />
+    <property name="checkTokenEndpointUrl" value="${tib.oauth.checktoken.endpoint}" />
+    <property name="accessTokenConverter" ref="tokenConverter"/>
+    <property name="tokenStore" ref="tokenStore"/>
+</bean>
+
+<bean id="tokenConverter" class="org.opentestsystem.shared.security.oauth.resource.SbacTokenConverter"/>
+ 
+<bean id="authenticationEntryPoint" class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
+    <property name="realmName" value="sbac" />
+</bean>
+
+<bean id="oauthAccessDeniedHandler" class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler" />
+
+<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+    <constructor-arg>
+        <list>
+            <bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
+            <bean class="org.springframework.security.access.vote.RoleVoter" />
+            <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+        </list>
+    </constructor-arg>
+</bean>
+
+<oauth2:expression-handler id="oauthExpressionHandler" />
+<oauth2:web-expression-handler id="oauthWebExpressionHandler" />
+
+<authentication-manager  alias="authenticationManager" xmlns="http://www.springframework.org/schema/security">
+    <authentication-provider >
+        <user-service>
+            <user name="pr" password="pr" authorities="ROLE_USER" />
+        </user-service>
+    </authentication-provider>
+</authentication-manager>
+
+<security:global-method-security pre-post-annotations="enabled" proxy-target-class="false">
+    <security:expression-handler ref="oauthExpressionHandler" />
+</security:global-method-security>
+
+<oauth2:resource-server  id="oauth2ProviderFilter"  resource-id="tib" token-services-ref="tokenServices" />
+ 
+
+<security:http security="none" pattern="/api"/>
+   
+<security:http pattern="/**" entry-point-ref="authenticationEntryPoint" access-decision-manager-ref="accessDecisionManager">
+    <security:anonymous enabled="false" />
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" method="GET" />
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" method="HEAD" />
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" method="OPTIONS" />
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" method="PUT" />
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" method="POST" />
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" method="DELETE" />
+    <security:custom-filter ref="oauth2ProviderFilter" before="PRE_AUTH_FILTER" />
+    <security:access-denied-handler ref="oauthAccessDeniedHandler" />
+    <security:expression-handler ref="oauthWebExpressionHandler" />
+</security:http>
+ 
+   
+</beans>

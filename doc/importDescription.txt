@@ -1,0 +1,11 @@
+
+///////////////////
+Synchronous Upload
+///////////////////
+Using a HTTP POST, the Client posts a multipart form which includes a single ZIP file of test items. The Test Item Bank process the ZIP file synchronously and returns an ImportSet "Domain Object" consisting of the overall status (SUCCESS or FAILURE), along with information about each item that was imported (such as requestor, time, and a URI) and any error messages that might have occurred. 
+
+
+///////////////////
+Synchronous Upload
+///////////////////
+Using a JSON document, the client posts a request for the processing of a set of ZIP files, which are located at a predetermined SFTP location. NOTE: The SFTP location, credentials, hostname, etc. are preconfigured in the Test Item Bank, but will eventually be looked up using the Program Managment component. The controller calls a service that is wired using Spring integration's asynchronous gateway (which handles the threading and pooling). This asynchronous service processes the files listed in the JSON document. While the import processes asyncornously, the controller immediately returns a "Domain Object" consisting of the import file set (same set that was requested in the JSON document), plus metadata about each such as requestor, time, status, and a URI. Initially the status will be "unimported" but by polling the returned URI, the Client can obtain the current status of each imported ZIP file. As noted in the Test Item Bank backlog, once the Monitoring and Alerting component is completed, Test Item Bank will need to be retrofitted to have the aysnchronous process POST an alert to M&A upon completion of the import.  

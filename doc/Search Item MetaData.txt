@@ -1,0 +1,18 @@
+title Search Item MetaData
+
+Client->+TIBController: GET https://server/context/item?grade=5&subject=math
+TIBController->TIBController:validateParameters()
+
+alt error
+TIBController-->Client: HTTP 400: Bad Request\nInvalid input Error
+else all parameters are valid
+TIBController->SearchCriteria: new()
+loop for each valid paramter
+TIBController->SearchCriteria: addCriteria(parmaeter)
+end
+TIBController->+TestItemBankService: Search(searchCriteria)
+TestItemBankService->TestItemBankRepository: findItems(seachCriteria)
+TestItemBankRepository->+TestItemBankRepository: buildMongoCriteria(searchCriteria)
+TestItemBankRepository-->TestItemBankService:List<Item>
+TestItemBankService-->TIBController:List<Item>
+TIBController-->Client: HTTP: 200 OK\n Item Metadata <json/xml>

@@ -1,0 +1,30 @@
+title Import APIP Items (Async upload)
+
+Client->+TIBController: POST https://server/context/uploadFile
+note over Client: json document \nspecifying relative \nlocation of zip files on SFTP site
+
+TIBController->ImportSet: new()
+
+TIBController->ImportSet: setStatus(unimported)
+TIBController->ImportSet: setRequestTime(new Date())
+TIBController->ImportSet: set...()
+TIBController->ImportSetService: saveImportSet(importSet)
+TIBController-->Client: 201 Created
+#ImportSetService-->-TIBController: importSet
+TIBController-->+ImportSetService: importFileSet(importFile) 
+ImportSetService->DBObject\n(metadata): new()
+ImportSetService->DBObject\n(metadata): put("...", ...) 
+ImportSetService->GridFsRepository:save(file, metadata)
+ImportSetService->+ImportSetService: parseManifest(file)
+#ImportSetService->-Manifest: getAPIPManifest()
+#Manifest-->-ImportSetService: APIPManifest
+ImportSetService->ImportSetService:createItems()
+ImportSetService->Item: set...(manifest.get...())
+ImportSetService->-ItemRepository: saveItem()
+
+
+ImportSetService-->-TIBController:
+TIBController->ImportSet: setStatus(complete)
+TIBController->ImportSetService: saveImportSet(importSet)
+
+

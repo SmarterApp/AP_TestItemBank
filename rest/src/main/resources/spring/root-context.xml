@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:task="http://www.springframework.org/schema/task" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+    <!-- Root Context: defines shared resources visible to all other web components -->
+    <import resource="classpath:security/securityContext.xml" />
+    <import resource="classpath:security/tenant-enforcement-context.xml" />
+    <import resource="classpath:/spring/rest-context.xml" />
+    <import resource="classpath:/spring/mongo-factory-context.xml" />
+    <import resource="classpath:/spring/persistence-context.xml" />
+    <import resource="classpath:/spring/service-context.xml" />
+    <import resource="classpath:api-gen-context.xml" />
+    <import resource="classpath:shared-web-context.xml" />
+    <!-- add the executor support here, it will load with the container,
+         but not cause test contexts to run the methods in an async -->
+    <task:annotation-driven executor="tibExecutor" scheduler="tibScheduler" />
+    <task:executor id="tibExecutor" pool-size="7"/>
+    <task:scheduler id="tibScheduler" pool-size="7"/>
+
+</beans>

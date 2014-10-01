@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<metadata>
+  <smarterAppMetadata xmlns="http://www.smarterapp.org/ns/1/assessment_item_metadata">
+    <Identifier>554</Identifier>
+    <AdministrationDate>Pilot</AdministrationDate>
+    <number1>1.1</number1>
+    <number1>2.2</number1>
+    <number1>3.3</number1>
+    <singleNumber>234</singleNumber>
+    <aString>Hello</aString>
+  </smarterAppMetadata>
+</metadata>

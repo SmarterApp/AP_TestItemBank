@@ -1,0 +1,29 @@
+title Import APIP Items (sync upload)
+
+Client->+TIBController: POST https://server/context/uploadFile
+note over Client: MultiPart form \nfile: itemFoo.zip (file payload)
+
+TIBController->ImportSet: new()
+
+TIBController->ImportSet: setStatus(unimported)
+TIBController->ImportSet: setRequestTime(new Date())
+TIBController->ImportSet: set...()
+TIBController->ImportSetService: saveImportSet(importSet)
+#ImportSetService-->-TIBController: importSet
+TIBController->+ImportSetService: importFileSet(importFile)
+ImportSetService->DBObject\n(metadata): new()
+ImportSetService->DBObject\n(metadata): put("...", ...) 
+ImportSetService->GridFsRepository:save(file, metadata)
+ImportSetService->+ImportSetService: parseManifest(file)
+#ImportSetService->-Manifest: getAPIPManifest()
+#Manifest-->-ImportSetService: APIPManifest
+ImportSetService->ImportSetService:createItems()
+ImportSetService->Item: set...(manifest.get...())
+ImportSetService->-ItemRepository: saveItem()
+
+
+ImportSetService-->-TIBController:
+TIBController->ImportSet: setStatus(complete)
+TIBController->ImportSetService: saveImportSet(importSet)
+TIBController-->Client: 201 Created
+

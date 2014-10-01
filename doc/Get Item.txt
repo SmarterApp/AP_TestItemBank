@@ -1,0 +1,16 @@
+title Get Item
+
+Client->+TIBController: GET https://server/context/item/apipitem_16621
+
+TIBController-->Client: HTTP 400 Bad Request:Invalid input Error
+all parameters are valid
+
+TIBController->+TestItemBankService: retrieveByIdentifier(identifier)
+TestItemBankService->TestItemBankRepository: retrieveItemByIdentifier(identifier)
+
+TestItemBankRepository-->TestItemBankService:Item
+TestItemBankService-->TIBController:Item
+alt item found
+TIBController-->Client: HTTP: 200 OK\n Item Metadata <json/xml>
+elseitem not found
+TIBController-->Client: HTTP: 404 NOT FOUND
