@@ -4,7 +4,7 @@
 
 	<groupId>org.opentestsystem.authoring</groupId>
 	<artifactId>test-item-bank.parent</artifactId>
-	<version>R01.00.00</version>
+	<version>R01.00.01</version>
 	<name>Smarter Balanced #11 Test Item Bank Repository Component - Parent Project</name>
 	<packaging>pom</packaging>
 
@@ -21,9 +21,9 @@
 	</modules>
 
     <scm>
-        <connection>scm:hg:https://bitbucket.org/sbacoss/testitembank</connection>
-        <developerConnection>scm:hg:https://bitbucket.org/sbacoss/testitembank</developerConnection>
-        <url>https://bitbucket.org/sbacoss/testitembank</url>
+        <connection>scm:hg:https://bitbucket.org/sbacoss/testitembank_release</connection>
+        <developerConnection>scm:hg:https://bitbucket.org/sbacoss/testitembank_release</developerConnection>
+        <url>https://bitbucket.org/sbacoss/testitembank_release</url>
     </scm>
 	<properties>
 		<mockito.version>1.8.4</mockito.version>
