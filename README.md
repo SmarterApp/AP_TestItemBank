@@ -16,7 +16,31 @@ We would be happy to receive feedback on its capabilities, problems, or future e
 * Feel free to **Fork** this project and develop your changes!
 
 ## Usage
-The Test Item Bank modules require configuration to be setup in Program Management in order for the modules to configure themselves correctly.  A sample configuration file that includes all the properties can be found in: [the repository](external_release_docs/required-progman-configuration.properties).  The contents of the file can be copied and pasted into Program Management.
+The Test Item Bank modules require configuration to be setup in Program Management in order for the modules to configure themselves correctly.  A sample configuration file that includes all the properties can be found in external_release_docs/required-progman-configuration.properties.  The contents of the file can be copied and pasted into Program Management and then modified based on the descriptions below.
+
+* `tib.file.pathname=/usr/local/tomcat/uploads` - Location on the TIB server where TIB will place test items it FTPs from the FTP server.
+* `tib.mna.description=The Test Item Bank Component` - Name of TIB component for display in MNA
+* `mna.mnaUrl=http://name.of.mna.server/rest/` - URL of the MNA server's REST endpoint
+* `tib.mongo.hostname=dns.name.of.mongodb.host` - DNS name of the Mongo DB host for TIB.
+* `tib.mongo.port=27017` - TIB Mongo DB server port
+* `tib.mongo.username=` - TIB Mongo DB username
+* `tib.mongo.password=` - TIB Mongo DB password
+* `tib.mongo.dbname=test` - TIB Mongo DB database name
+* `tib.sftp.hostname=name.of.sftp.server` - Name of SFTP server from which TIB reads items.
+* `tib.sftp.port=22` - TIB SFTP port
+* `tib.sftp.user=` - TIB SFTP username
+* `tib.sftp.password=` - TIB SFTP password
+* `oauth.access.url=https://name.of.sso.server/auth/oauth2/access_token?realm=/sbac` - SSO OAuth service URL including realm 
+* `tib.oauth.checktoken.endpoint=https://name.of.sso.server/auth/oauth2/tokeninfo?realm=/sbac` - SSO OAuth checktoken service URL including realm 
+* `tib.oauth.resource.client.id=` - OAuth TIB client ID 
+* `tib.oauth.resource.client.secret=` -  OAuth TIB client secret
+* `mna.oauth.client.id=mna` - OAuth MNA client name
+* `mna.oauth.client.secret=` -  OAuth MNA client secret
+* `permission.uri=https://name.of.permissions.server/rest` - REST endpoint of Permissions server
+* `tib.clean.files.cron.trigger=0 0 8 * * *` - Cron config for cleaning TIB files
+* `tib.sftp.import.directory=` - Import directory name in SFTP directory for TIB user
+* `tib.clean.files.age.days=100` - How many days to keep files in TIB's SFTP directory on the sftp server
+* `component.name=Test Item Bank` - Component name. Must match name in Permissions and Program Management.
 
 ### REST Module
 The REST module is a deployable WAR file (`test-item-bank.rest-VERSION.war`) that provides REST endpoints that can be used to access and modify test item data.  The REST module has an internal dependency to the Persistence module.
