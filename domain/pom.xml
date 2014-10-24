@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.opentestsystem.authoring</groupId>
 		<artifactId>test-item-bank.parent</artifactId>
-		<version>R01.00.02</version>
+		<version>0.0.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>test-item-bank.domain</artifactId>
 	<name>Smarter Balanced #11 Test Item Bank Repository Component - Domain</name>
