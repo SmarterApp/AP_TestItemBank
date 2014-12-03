@@ -67,7 +67,7 @@
 <oauth2:resource-server  id="oauth2ProviderFilter"  resource-id="tib" token-services-ref="tokenServices" />
  
 
-<security:http security="none" pattern="/api"/>
+<security:http security="none" pattern="/api/**"/>
    
 <security:http pattern="/**" entry-point-ref="authenticationEntryPoint" access-decision-manager-ref="accessDecisionManager">
     <security:anonymous enabled="false" />
