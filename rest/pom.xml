@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.opentestsystem.authoring</groupId>
         <artifactId>test-item-bank.parent</artifactId>
-        <version>R01.00.09</version>
+        <version>R01.00.10</version>
     </parent>
 
     <artifactId>test-item-bank.rest</artifactId>
