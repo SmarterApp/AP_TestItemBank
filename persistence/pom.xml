@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.opentestsystem.authoring</groupId>
 		<artifactId>test-item-bank.parent</artifactId>
-		<version>R01.00.36</version>
+		<version>R01.00.38</version>
 	</parent>
 	<artifactId>test-item-bank.persistence</artifactId>
     <name>Smarter Balanced #11 Test Item Bank Repository Component - Persistence</name>
