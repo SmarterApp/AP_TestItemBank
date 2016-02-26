@@ -4,14 +4,14 @@
 
 	<groupId>org.opentestsystem.authoring</groupId>
 	<artifactId>test-item-bank.parent</artifactId>
-	<version>R01.00.56</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>Smarter Balanced #11 Test Item Bank Repository Component - Parent Project</name>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.opentestsystem.shared</groupId>
 		<artifactId>shared-build-parent</artifactId>
-		<version>0.0.7</version>
+		<version>0.0.7-SNAPSHOT</version>
 	</parent>
 
 	<modules>
